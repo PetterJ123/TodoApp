@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 text = (EditText)findViewById(R.id.editText);
-                //CheckBox checkbox = (CheckBox)findViewById(R.id.checkBox);
+                
                 if (text.getText().length() > 0) {
                     LinearLayout linearlayout = (LinearLayout)findViewById(R.id.linearLayout);
 
