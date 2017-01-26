@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
+
         // Button variable
         Button btn;
 
@@ -38,14 +39,15 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new Builder(this).addApi(AppIndex.API).build();
 
-        // Button listener that displays a toast when button is clicked
+        // Button listener that displays a toast and appends a task to the listview when the button is clicked
         btn = (Button)findViewById(R.id.btn);
 
-
         btn.setOnClickListener(new View.OnClickListener(){
+            EditText text;
+
             @Override
             public void onClick(View v){
-                EditText text = (EditText)findViewById(R.id.editText);
+                text = (EditText)findViewById(R.id.editText);
                 //CheckBox checkbox = (CheckBox)findViewById(R.id.checkBox);
                 if (text.getText().length() > 0) {
                     LinearLayout linearlayout = (LinearLayout)findViewById(R.id.linearLayout);
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                         toast = Toast.makeText(getBaseContext(), "Task Created", Toast.LENGTH_SHORT);
                     }
                     toast.show();
+
+                    text.setText("");
                 }
             }
         });
@@ -104,4 +108,8 @@ public class MainActivity extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
+
+    // Handwritten code TODO-stub
+
+
 }
