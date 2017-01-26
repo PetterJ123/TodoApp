@@ -1,20 +1,23 @@
 package com.example.petri.todoapp;
 
+import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+
 
 import static com.google.android.gms.common.api.GoogleApiClient.*;
 
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
+        //Context context =
         // Button variable
         Button btn;
 
@@ -41,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         // Button listener that displays a toast when button is clicked
         btn = (Button)findViewById(R.id.btn);
 
-
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -50,17 +53,15 @@ public class MainActivity extends AppCompatActivity {
                 if (text.getText().length() > 0) {
                     LinearLayout linearlayout = (LinearLayout)findViewById(R.id.linearLayout);
 
-                    CheckBox checkbox = new CheckBox(getApplicationContext());
+                    CheckBox checkbox = (CheckBox)getLayoutInflater().inflate(R.layout.checkboxtemplate, null);
                     checkbox.setText(text.getText());
-                    //checkbox.
-                    //checkbox.onKeyLongPress()
                     linearlayout.addView(checkbox);
 
                     try {
                         toast.getView().isShown();
                         toast.setText("Task Created");
                     } catch (Exception e) {
-                        toast = Toast.makeText(getBaseContext(), "Task Created", Toast.LENGTH_SHORT);
+                        toast = Toast.makeText(getBaseContext(), "Task Created", Toast.LENGTH_SHORT); //getBaseContext()
                     }
                     toast.show();
                 }
