@@ -8,10 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!--<style name="MaterialDark" parent="android:Theme.Material">
-        <item name="holoMainDark">@color/holoMainDark</item>
-        <item name="holoPrimDark">@color/holoPrimDark</item>
-        <item name="holoAccent">@color/holoAccent</item>
-    </style>-->
+    <style name="AppTheme.CheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
 
+    </style>
 </resources>
