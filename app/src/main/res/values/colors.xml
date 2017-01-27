@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Custom colors for holo theme-->
+    <!--<color name="holoMainDark">#3C3F41</color>
+    <color name="holoPrimDark">#5A595B</color>
+    <color name="holoAccent">#FFFFFF</color>-->
 </resources>
