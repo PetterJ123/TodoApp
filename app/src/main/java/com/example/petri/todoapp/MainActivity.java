@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     //checkbox.onKeyLongPress()
                     linearlayout.addView(checkbox);
 
+                    // Tries to display a toast when the button is pressed
                     try {
                         toast.getView().isShown();
                         toast.setText("Task Created");
@@ -66,12 +67,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                     toast.show();
 
+                    // Empties the text field when you submit the task
                     text.setText("");
                 }
             }
         });
     }
-
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
