@@ -13,20 +13,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Todo:"
+        android:text="@string/todo_text"
         android:textSize="30sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/textView" />
 
     <Button
-        android:text="Add Task"
+        android:text="@string/add_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:contentDescription="Button that adds a task to the list" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -34,25 +33,16 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editText"
-        android:hint="Your Task"
+        android:hint="@string/hint_text"
         android:layout_above="@+id/btn"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
 
-    <ScrollView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/textView"
-        android:layout_above="@+id/editText">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout"
-            android:theme="@style/AppTheme">
-
-        </LinearLayout>
-    </ScrollView>
+        android:layout_above="@+id/editText"
+        android:id="@+id/listView" />
 
 </RelativeLayout>
