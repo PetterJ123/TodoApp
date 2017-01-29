@@ -26,17 +26,19 @@
         android:id="@+id/btn"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
+        android:elevation="24dp"
+        android:clickable="false" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editText"
         android:hint="@string/hint_text"
         android:layout_above="@+id/btn"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:inputType="textCapSentences"/>
 
     <ListView
         android:layout_width="match_parent"

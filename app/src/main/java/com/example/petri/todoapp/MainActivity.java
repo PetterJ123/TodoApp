@@ -9,6 +9,9 @@ import android.os.Build;
 import android.provider.BaseColumns;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private GoogleApiClient client;
 
     private Toast toast;
+    // Button variable
+    Button btn;
+    EditText text;
 
     final ArrayList<String> arraylist = new ArrayList<String>();
     final ArrayList<Integer> arraylistid = new ArrayList<Integer>();
@@ -50,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
-        // Button variable
-        Button btn;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -91,13 +95,47 @@ public class MainActivity extends AppCompatActivity {
 
         // Button listener that displays a toast and appends a task to the listview when the button is clicked
         btn = (Button)findViewById(R.id.btn);
+        btn.setEnabled(false);
 
+        text = (EditText)findViewById(R.id.editText);
+        text.addTextChangedListener(new TextWatcher(){
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                /*if(text.getText().length() <= 0){
+                    btn.setEnabled(false);
+                }
+                else{
+                    btn.setEnabled(true);
+                }*/
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                /*if(text.getText().length() <= 0){
+                    btn.setEnabled(false);
+                }
+                else{
+                    btn.setEnabled(true);
+                }*/
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(text.getText().length() <= 0){
+                    btn.setEnabled(false);
+                }
+                else{
+                    btn.setEnabled(true);
+                }
+            }
+
+        });
         btn.setOnClickListener(new View.OnClickListener(){
-            EditText text;
+            //EditText text = (EditText)findViewById(R.id.editText);
 
             @Override
             public void onClick(View v){
-                text = (EditText)findViewById(R.id.editText);
 
                 if (text.getText().length() > 0) {
 
@@ -122,10 +160,10 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         toast = Toast.makeText(getBaseContext(), R.string.created_text, Toast.LENGTH_SHORT); //getBaseContext()
                     }
-                    // Update toast
+                    // Shows the toast message
                     toast.show();
 
-                    // Clear out toast text
+                    // Empties the text field when you submit the task
                     text.setText("");
                 }
             }
@@ -178,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.

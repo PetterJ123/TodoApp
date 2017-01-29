@@ -11,5 +11,4 @@
     <style name="AppTheme.CheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
 
     </style>
-
 </resources>
