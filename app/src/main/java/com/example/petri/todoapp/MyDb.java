@@ -42,6 +42,12 @@ public class MyDb {
         return database.delete(EMP_TABLE, EMP_ID+"="+id, null);
     }
 
+    public int boolRecords(String id, int check) {
+        ContentValues values = new ContentValues();
+        values.put(EMP_CHECK, Integer.toString(check));
+        return database.update(EMP_TABLE, values, EMP_ID+"="+id, null);
+    }
+
     public Cursor selectRecords() {
         String[] cols = new String[]{EMP_ID, EMP_TASK, EMP_CHECK};
         Cursor mCursor = database.query(true, EMP_TABLE, cols, null

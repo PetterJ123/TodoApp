@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new Builder(this).addApi(AppIndex.API).build();
 
+        // Init database
+        final MyDb db = new MyDb(getApplicationContext());
+
         // Handle for future listview actions
         final ListView listview = (ListView) findViewById(R.id.listView);
         // Change text to show strikethrough if single click on item
@@ -71,13 +74,17 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView v = (TextView)view;
                 v.setPaintFlags(v.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
+                // Check if strikethrough flag is set, if so fix boolean record
+                if ((v.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG) > 0)
+                    db.boolRecords(arraylistid.get(position).toString(), 1);
+                else
+                    db.boolRecords(arraylistid.get(position).toString(), 0);
             }
         });
         // Give listview permission to spawn a menu
         registerForContextMenu(listview);
 
         // Load previous messages
-        final MyDb db = new MyDb(getApplicationContext());
         try (Cursor curse = db.selectRecords()) {
             // Fill array
             while (curse.moveToNext()) {
@@ -91,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
             // Push array into listview
             ArrayAdapter arrayadapter = new ArrayAdapter(MainActivity.this, R.layout.textview_template, arraylist);
             listview.setAdapter(arrayadapter);
+
+            // Set all previously checked entries to checked
+            for (int index = 0; index < arraylistbool.size(); index++) {
+                if (arraylistbool.get(index) == 1) {
+                    TextView v = (TextView)getViewByPosition(index, listview);
+                    v.setPaintFlags(v.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
+                }
+            }
         }
 
         // Button listener that displays a toast and appends a task to the listview when the button is clicked
@@ -143,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
                     db.createRecords(null, text.getText().toString(), 0); // zero as false
                     Cursor tmp_curse = db.selectRecords();
                     tmp_curse.moveToLast();
-                    tmp_curse.moveToPrevious();
                     arraylistid.add(tmp_curse.getInt(0));
                     arraylist.add(tmp_curse.getString(1));
                     arraylistbool.add(tmp_curse.getInt(2));
@@ -215,6 +229,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         return true;
+    }
+
+    public View getViewByPosition(int pos, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
     }
 
     /**
